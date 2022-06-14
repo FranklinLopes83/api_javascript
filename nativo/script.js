@@ -57,7 +57,38 @@ async function filtrarDados(idPersonagem){
     try {
         let resultado = await fetch(url)
         const dados = await resultado.json()
-        console.log(dados)
+        console.log(resultado)
+
+        
+        //CRIANDO ELEMENTOS HTML
+
+        const linha = document.createElement("tr")
+        const tdNome = document.createElement("td") 
+        const tdPeso = document.createElement("td")
+        const tdCorOlho = document.createElement("td")
+
+        //CRIANDO CONTEÚDO DA COLUNAS
+
+        tdNome.textContent  = dados.name
+        tdPeso.textContent  = dados.mass
+        tdCorOlho.textContent  = dados.eye_color
+
+                while(resultado.status != 200){
+                    btnFiltrar.setAttribute("disable", "disable")
+                    btnFiltrar.textContent= "Carregando..."
+                }
+
+                btnFiltrar.removeAttribute("disable")
+                    btnFiltrar.textContent= "filtrar"
+
+        //ADICIONANDO OS ELEMENTOS EM SUAS RESPECTIVAS TAGS MÃE/PAI
+
+        linha.appendChild(tdNome)
+        linha.appendChild(tdPeso)
+        linha.appendChild(tdCorOlho)
+
+
+        tabela.appendChild(linha)
 
         
 
@@ -67,6 +98,7 @@ async function filtrarDados(idPersonagem){
 }
 
 //carregarDados()
+
 btnFiltrar.addEventListener('click', (evento)=>{
     evento.preventDefault()
     if(campoBusca.value != "" && campoBusca.value >= 1 && campoBusca.value <= 82){
