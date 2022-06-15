@@ -87,9 +87,12 @@ async function filtrarDados(idPersonagem){
         linha.appendChild(tdPeso)
         linha.appendChild(tdCorOlho)
 
-
+        //SE HOUVER ALGUUMA LINHA SERÁ REMOVIDA
+        if(tabela.children.length > 0){
+            tabela.removeChild(tabela.firstElementChild)
+        }
         tabela.appendChild(linha)
-
+        
         
 
     } catch (error) {
